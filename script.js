@@ -638,3 +638,156 @@ document.addEventListener('DOMContentLoaded', function() {
 document.addEventListener('DOMContentLoaded', function() {
     document.body.style.overflow = 'hidden';
 });
+
+// Initialize music player and mute functionality
+document.addEventListener('DOMContentLoaded', function() {
+    initMusicPlayer();
+});
+
+function initMusicPlayer() {
+    const musicPlayer = document.getElementById('birthdayMusic');
+    const muteBtn = document.getElementById('muteBtn');
+    let isMuted = false;
+    
+    // Play music automatically when page loads (with user interaction requirement handled)
+    setTimeout(() => {
+        // Try to play music - this might fail due to browser autoplay policies
+        const playPromise = musicPlayer.play();
+        
+        if (playPromise !== undefined) {
+            playPromise
+                .then(() => {
+                    // Music is playing
+                    console.log('Music started playing automatically');
+                })
+                .catch(error => {
+                    // Autoplay failed, music will start when user interacts
+                    console.log('Autoplay blocked by browser, music will start after user interaction');
+                });
+        }
+    }, 500); // Small delay to ensure everything is loaded
+    
+    // Mute/unmute functionality
+    if (muteBtn) {
+        muteBtn.addEventListener('click', function() {
+            isMuted = !isMuted;
+            
+            if (isMuted) {
+                musicPlayer.muted = true;
+                this.classList.add('muted');
+                document.querySelector('.mute-icon').textContent = '🔇';
+            } else {
+                musicPlayer.muted = false;
+                this.classList.remove('muted');
+                document.querySelector('.mute-icon').textContent = '🔊';
+            }
+        });
+        
+        // Initialize button state based on initial volume
+        if (musicPlayer.muted) {
+            muteBtn.classList.add('muted');
+            document.querySelector('.mute-icon').textContent = '🔇';
+        }
+    }
+    
+    // Also play music when user clicks anywhere (to handle autoplay restrictions)
+    document.addEventListener('click', function enableMusic() {
+        if (musicPlayer.paused) {
+            musicPlayer.play().then(() => {
+                console.log('Music started playing after user interaction');
+            }).catch(e => {
+                console.log('Could not start music:', e);
+            });
+        }
+        
+        // Remove this event listener after first interaction to avoid conflicts
+        document.removeEventListener('click', enableMusic);
+    }, { once: true });
+}
+
+// Enhanced fireworks effect after transition
+function initFireworksAfterTransition() {
+    const openingOverlay = document.getElementById('openingOverlay');
+    
+    // Listen for when the overlay is hidden
+    const observer = new MutationObserver(function(mutations) {
+        mutations.forEach(function(mutation) {
+            if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+                if (openingOverlay.classList.contains('hidden')) {
+                    // Wait for transition to complete before showing fireworks
+                    setTimeout(() => {
+                        createFireworksEffect();
+                        
+                        // Also trigger confetti occasionally
+                        addConfettiEffect();
+                    }, 300);
+                }
+            }
+        });
+    });
+    
+    observer.observe(openingOverlay, {
+        attributes: true,
+        attributeFilter: ['class']
+    });
+}
+
+// Create a more sophisticated fireworks effect
+function createFireworksEffect() {
+    const container = document.body;
+    const colors = ['#ff6b6b', '#ffd166', '#06d6a0', '#118ab2', '#073b4c', '#ff9a9e', '#fad0c4'];
+    
+    // Create multiple fireworks at different positions
+    for (let i = 0; i < 15; i++) {
+        setTimeout(() => {
+            const firework = document.createElement('div');
+            firework.className = 'firework';
+            
+            // Random position
+            const posX = Math.random() * window.innerWidth;
+            const posY = Math.random() * window.innerHeight * 0.6; // Limit to upper part of screen
+            
+            // Random color
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            
+            firework.style.left = `${posX}px`;
+            firework.style.top = `${posY}px`;
+            firework.style.position = 'fixed';
+            firework.style.width = '5px';
+            firework.style.height = '5px';
+            firework.style.borderRadius = '50%';
+            firework.style.backgroundColor = color;
+            firework.style.zIndex = '9998';
+            firework.style.pointerEvents = 'none';
+            
+            container.appendChild(firework);
+            
+            // Animate the firework
+            const animation = firework.animate([
+                { 
+                    transform: 'scale(1)', 
+                    opacity: 1,
+                    boxShadow: `0 0 10px 2px ${color}`
+                },
+                { 
+                    transform: 'scale(30)', 
+                    opacity: 0,
+                    boxShadow: `0 0 30px 10px ${color}`
+                }
+            ], {
+                duration: 1500,
+                easing: 'cubic-bezier(0, 0.2, 0.8, 1)'
+            });
+            
+            // Remove element after animation
+            animation.onfinish = () => {
+                firework.remove();
+            };
+        }, i * 200); // Stagger the fireworks
+    }
+}
+
+// Initialize fireworks after transition
+document.addEventListener('DOMContentLoaded', function() {
+    initFireworksAfterTransition();
+});
