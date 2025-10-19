@@ -1,0 +1,17 @@
+{
+  "name": "happy-birthday-website",
+  "version": "1.0.0",
+  "description": "A beautiful birthday celebration website",
+  "main": "index.html",
+  "scripts": {
+    "dev": "npx serve .",
+    "start": "npx serve .",
+    "deploy": "vercel"
+  },
+  "keywords": ["birthday", "website", "celebration", "html", "css", "javascript"],
+  "author": "Birthday Website Creator",
+  "license": "MIT",
+  "devDependencies": {
+    "vercel": "^32.4.1"
+  }
+}

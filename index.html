@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Special</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Font for beautiful typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Floating elements for animation -->
+    <div class="floating-element element-1"></div>
+    <div class="floating-element element-2"></div>
+    <div class="floating-element element-3"></div>
+    <div class="floating-element element-4"></div>
+    <div class="floating-element element-5"></div>
+
+    <!-- Hero Section -->
+    <header class="hero-section">
+        <div class="hero-content">
+            <h1 class="birthday-title rainbow-text glow" id="title">Happy Birthday!</h1>
+            <p class="subtitle">A special celebration for someone special</p>
+            <div class="balloon-container">
+                <div class="balloon balloon-1 heartbeat">🎈</div>
+                <div class="balloon balloon-2">🎉</div>
+                <div class="balloon balloon-3">💖</div>
+                <div class="balloon balloon-4">🌟</div>
+                <div class="balloon balloon-5">💝</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="navbar">
+        <ul class="nav-menu">
+            <li><a href="#about">About Us</a></li>
+            <li><a href="#memories">Memories</a></li>
+            <li><a href="#video">Special Video</a></li>
+            <li><a href="#wishes">Wishes</a></li>
+        </ul>
+    </nav>
+
+    <!-- About Section -->
+    <section id="about" class="section about-section">
+        <div class="container">
+            <h2 class="section-title">Our Journey Together</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <p>Every moment with you has been a treasure. The laughter, the adventures, the quiet moments - all of these have made my life more beautiful.</p>
+                    <p>On your special day, I want you to know how much you mean to me. You bring joy, light, and love into my life every single day.</p>
+                </div>
+                <div class="photo-gallery">
+                    <!-- Photo placeholders - Replace with your own images -->
+                    <div class="photo-placeholder">
+                        <!-- TODO: Replace with actual image - Photo of you two together -->
+                        <div class="placeholder-text">Photo Placeholder</div>
+                    </div>
+                    <div class="photo-placeholder">
+                        <!-- TODO: Replace with actual image - Another memory -->
+                        <div class="placeholder-text">Photo Placeholder</div>
+                    </div>
+                    <div class="photo-placeholder">
+                        <!-- TODO: Replace with actual image - Special moment -->
+                        <div class="placeholder-text">Photo Placeholder</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Memories Section -->
+    <section id="memories" class="section memories-section">
+        <div class="container">
+            <h2 class="section-title">Our Beautiful Memories</h2>
+            <div class="memories-grid">
+                <div class="memory-card">
+                    <div class="memory-placeholder">
+                        <!-- TODO: Replace with actual image - Memory 1 -->
+                        <div class="placeholder-text">Memory 1</div>
+                    </div>
+                    <p>Our first meeting</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-placeholder">
+                        <!-- TODO: Replace with actual image - Memory 2 -->
+                        <div class="placeholder-text">Memory 2</div>
+                    </div>
+                    <p>Our first date</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-placeholder">
+                        <!-- TODO: Replace with actual image - Memory 3 -->
+                        <div class="placeholder-text">Memory 3</div>
+                    </div>
+                    <p>That special trip</p>
+                </div>
+                <div class="memory-card">
+                    <div class="memory-placeholder">
+                        <!-- TODO: Replace with actual image - Memory 4 -->
+                        <div class="placeholder-text">Memory 4</div>
+                    </div>
+                    <p>Your achievement</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Video Section -->
+    <section id="video" class="section video-section">
+        <div class="container">
+            <h2 class="section-title">A Special Message</h2>
+            <div class="video-container">
+                <video id="birthday-video">
+                    <source src="https://sample-videos.com/video123/mp4/720/big_buck_bunny_720p_1mb.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="video-controls">
+                    <button id="play-pause-btn">▶</button>
+                    <input type="range" id="seek-bar" value="0">
+                    <button id="volume-btn">🔊</button>
+                    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+                </div>
+                <p>Watch this special message I've prepared for you!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Wishes Section -->
+    <section id="wishes" class="section wishes-section">
+        <div class="container">
+            <h2 class="section-title">Send Your Wishes</h2>
+            <div class="wishes-content">
+                <div class="wishes-form">
+                    <input type="text" id="wish-input" placeholder="Write your birthday wish here...">
+                    <button id="submit-wish">Send Wish</button>
+                </div>
+                <div class="wishes-display">
+                    <!-- Dynamic wishes will appear here -->
+                    <div class="wish-item">
+                        <p>Happy Birthday! Wishing you all the happiness in the world!</p>
+                        <span class="timestamp">Just now</span>
+                    </div>
+                    <div class="wish-item">
+                        <p>May this year bring you joy, success, and countless smile!</p>
+                        <span class="timestamp">2 minutes ago</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer-section">
+        <div class="container">
+            <p>Made with ❤️ for the most amazing person in my life</p>
+            <p>Happy Birthday! May all your dreams come true.</p>
+        </div>
+    </footer>
+
+    <!-- Particles for animation -->
+    <div class="particles-container">
+        <div class="particle particle-1"></div>
+        <div class="particle particle-2"></div>
+        <div class="particle particle-3"></div>
+        <div class="particle particle-4"></div>
+        <div class="particle particle-5"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
