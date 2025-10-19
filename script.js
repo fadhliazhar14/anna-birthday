@@ -561,3 +561,80 @@ setInterval(() => {
         addConfettiEffect();
     }
 }, 5000);
+
+// Opening overlay functionality
+document.addEventListener('DOMContentLoaded', function() {
+    initOpeningOverlay();
+});
+
+function initOpeningOverlay() {
+    const openingOverlay = document.getElementById('openingOverlay');
+    const openCardBtn = document.getElementById('openCardBtn');
+    
+    // Add click event to the open card button
+    if (openCardBtn) {
+        openCardBtn.addEventListener('click', function(event) {
+            // Add ripple effect to button
+            createRippleEffect(this, event);
+            
+            // Add animation class to button
+            this.classList.add('activated');
+            
+            // Wait for button animation before hiding overlay
+            setTimeout(() => {
+                // Add fade out animation to overlay
+                openingOverlay.classList.add('hidden');
+                
+                // Enable scrolling on body after the transition
+                setTimeout(() => {
+                    document.body.style.overflow = 'visible';
+                    document.body.classList.add('overlay-hidden');
+                }, 1200); // Match the CSS transition duration
+            }, 300);
+        });
+    }
+    
+    // Auto-hide for testing purposes after a few seconds if needed
+    // Remove this in production
+    // setTimeout(() => {
+    //     if (!openingOverlay.classList.contains('hidden')) {
+    //         openingOverlay.classList.add('hidden');
+    //         document.body.style.overflow = 'visible';
+    //     }
+    // }, 10000);
+}
+
+// Create ripple effect for button click
+function createRippleEffect(element, event) {
+    const ripple = document.createElement('span');
+    const rect = element.getBoundingClientRect();
+    const size = Math.max(rect.width, rect.height);
+    const x = event.clientX - rect.left - size / 2;
+    const y = event.clientY - rect.top - size / 2;
+    
+    ripple.style.width = ripple.style.height = size + 'px';
+    ripple.style.left = x + 'px';
+    ripple.style.top = y + 'px';
+    ripple.classList.add('ripple');
+    
+    // Add ripple to button
+    element.appendChild(ripple);
+    
+    // Remove ripple after animation
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+}
+
+// Prevent scrolling when overlay is visible
+document.addEventListener('DOMContentLoaded', function() {
+    const openingOverlay = document.getElementById('openingOverlay');
+    if (openingOverlay && !openingOverlay.classList.contains('hidden')) {
+        document.body.style.overflow = 'hidden';
+    }
+});
+
+// Add initial class to body to hide overflow
+document.addEventListener('DOMContentLoaded', function() {
+    document.body.style.overflow = 'hidden';
+});

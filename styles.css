@@ -886,6 +886,13 @@ body {
     -moz-osx-font-smoothing: grayscale;
 }
 
+/* Performance improvements for all devices */
+body {
+    /* Optimize rendering */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 /* Use hardware acceleration for animations */
 .memory-card, .photo-placeholder, .balloon, .floating-element {
     will-change: transform;
@@ -903,5 +910,160 @@ body {
     body {
         -webkit-font-smoothing: antialiased;
         -moz-osx-font-smoothing: grayscale;
+    }
+}
+
+/* Opening Overlay Styles */
+.opening-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    opacity: 1;
+    transition: opacity 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.opening-overlay.hidden {
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+}
+
+.overlay-content {
+    text-align: center;
+    padding: 40px;
+    max-width: 600px;
+    width: 90%;
+    animation: overlay-content-pop 1.2s cubic-bezier(0.68, -0.55, 0.27, 1.55) both;
+}
+
+.overlay-title {
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 20px;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    animation: title-pulse 2s infinite;
+}
+
+.overlay-subtitle {
+    font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 40px;
+    animation: fade-in 1.5s ease-out;
+}
+
+.open-card-btn {
+    background: linear-gradient(45deg, var(--primary-color), #ff8e8e);
+    color: white;
+    border: none;
+    padding: 18px 40px;
+    font-size: 1.3rem;
+    font-weight: 600;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.4);
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    font-family: 'Poppins', sans-serif;
+}
+
+.open-card-btn:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 12px 30px rgba(255, 107, 107, 0.6);
+}
+
+.open-card-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.open-card-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.open-card-btn:hover::before {
+    left: 100%;
+}
+
+/* Ripple effect for button */
+.open-card-btn .ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.7);
+    transform: scale(0);
+    animation: ripple-animation 0.6s linear;
+    pointer-events: none;
+}
+
+@keyframes ripple-animation {
+    to {
+        transform: scale(2.5);
+        opacity: 0;
+    }
+}
+
+/* Overlay animations */
+@keyframes overlay-content-pop {
+    0% {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+    60% {
+        transform: scale(1.05) translateY(-10px);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+/* Responsive styles for overlay */
+@media (max-width: 768px) {
+    .overlay-content {
+        max-width: 90%;
+    }
+    
+    .overlay-title {
+        font-size: 2.5rem;
+    }
+    
+    .overlay-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .open-card-btn {
+        padding: 15px 30px;
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 400px) {
+    .overlay-title {
+        font-size: 2rem;
+    }
+    
+    .overlay-subtitle {
+        font-size: 1rem;
+    }
+    
+    .open-card-btn {
+        padding: 12px 25px;
+        font-size: 1rem;
     }
 }
