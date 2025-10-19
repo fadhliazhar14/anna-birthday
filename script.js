@@ -66,55 +66,6 @@ function initNavigation() {
     });
 }
 
-// Wish form functionality
-function initWishForm() {
-    const wishInput = document.getElementById('wish-input');
-    const submitBtn = document.getElementById('submit-wish');
-    const wishesDisplay = document.querySelector('.wishes-display');
-    
-    if (submitBtn && wishInput) {
-        submitBtn.addEventListener('click', addWish);
-        wishInput.addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                addWish();
-            }
-        });
-    }
-    
-    function addWish() {
-        const wishText = wishInput.value.trim();
-        
-        if (wishText) {
-            // Create wish element
-            const wishItem = document.createElement('div');
-            wishItem.className = 'wish-item';
-            
-            const timestamp = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-            
-            wishItem.innerHTML = `
-                <p>${wishText}</p>
-                <span class="timestamp">Just now</span>
-            `;
-            
-            // Add to the top of the wishes display
-            wishesDisplay.insertBefore(wishItem, wishesDisplay.firstChild);
-            
-            // Clear input
-            wishInput.value = '';
-            
-            // Add animation
-            wishItem.style.opacity = '0';
-            wishItem.style.transform = 'translateX(-20px)';
-            
-            setTimeout(() => {
-                wishItem.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-                wishItem.style.opacity = '1';
-                wishItem.style.transform = 'translateX(0)';
-            }, 10);
-        }
-    }
-}
-
 // Scroll effects
 function initScrollEffects() {
     // Intersection Observer for animations on scroll
@@ -484,7 +435,6 @@ function initEnhancedAnimations() {
     const title = document.getElementById('title');
     if (title) {
         title.classList.add('rainbow-text');
-        title.classList.add('glow');
     }
     
     // Add heartbeat animation to balloons periodically
