@@ -55,12 +55,12 @@ body {
 
 /* Hero Section */
 .hero-section {
-    height: 100vh;
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow: hidden;
+    overflow: visible; /* Changed from hidden to visible to show all content */
     background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
 }
 
@@ -68,7 +68,11 @@ body {
     text-align: center;
     z-index: 2;
     position: relative;
+    padding: 40px 20px;
+    max-width: 100%;
 }
+
+
 
 .birthday-title {
     font-size: 4rem;
@@ -81,7 +85,8 @@ body {
 .subtitle {
     font-size: 1.5rem;
     color: var(--light-color);
-    margin-bottom: 40px;
+    margin-top: 60px;
+    margin-bottom: 20px;
     animation: fade-in 1.5s ease-out;
 }
 
@@ -89,7 +94,7 @@ body {
 .balloon-container {
     position: relative;
     height: 200px;
-    margin: 30px auto;
+    margin: 0 auto;
     width: 300px;
 }
 
@@ -703,7 +708,6 @@ video:focus {
 .txt-glow-div {
     border-radius: 36px;
     padding: 12px 24px;
-    margin: 10px 10px 20px 10px;
 }
 
 .glow {
@@ -755,6 +759,10 @@ video:focus {
     .section-title {
         font-size: 2.5rem;
     }
+    
+    .hbd-image {
+        max-width: 350px;
+    }
 }
 
 @media (max-width: 991px) {
@@ -772,6 +780,10 @@ video:focus {
     
     .section-title {
         font-size: 2.2rem;
+    }
+    
+    .hbd-image {
+        max-width: 300px;
     }
 }
 
@@ -836,11 +848,15 @@ video:focus {
         max-width: 100%;
         margin-top: 5px;
     }
+    
+    .hbd-image {
+        max-width: 250px;
+    }
 }
 
 @media (max-width: 576px) {
     .birthday-title {
-        font-size: 2rem;
+        font-size: 1.4rem;
     }
     
     .section-title {
@@ -862,6 +878,10 @@ video:focus {
     .element-1, .element-2, .element-3, .element-4, .element-5 {
         display: none; /* Hide large floating elements on mobile to improve performance */
     }
+    
+    .hbd-image {
+        max-width: 200px;
+    }
 }
 
 /* Extra small devices (landscape phones, 576px and down) */
@@ -880,6 +900,14 @@ video:focus {
     
     .balloon {
         font-size: 2rem;
+    }
+    
+    .hbd-image {
+        max-width: 150px;
+    }
+    
+    .hero-content {
+        padding: 20px 15px;
     }
 }
 
@@ -910,6 +938,21 @@ body {
     /* Optimize rendering */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+/* HBD Image Styles */
+.hbd-image-container {
+    margin: 0 auto;
+    text-align: center;
+}
+
+.hbd-image {
+    max-width: 400px;
+    width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border-radius: 10px;
 }
 
 /* Use hardware acceleration for animations */
