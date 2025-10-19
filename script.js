@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Initialize all interactive elements
     initNavigation();
-    initWishForm();
+
     initScrollEffects();
     initAnimations();
 });
@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
 // Navigation functionality
 function initNavigation() {
     const navbar = document.querySelector('.navbar');
+    const navMenu = document.querySelector('.nav-menu');
     const navLinks = document.querySelectorAll('.nav-menu a');
+    const hamburger = document.getElementById('hamburger');
     
     // Add scroll effect to navbar
     window.addEventListener('scroll', function() {
@@ -18,6 +20,32 @@ function initNavigation() {
             navbar.classList.add('scrolled');
         } else {
             navbar.classList.remove('scrolled');
+        }
+    });
+    
+    // Toggle mobile menu
+    if (hamburger) {
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+    }
+    
+    // Close mobile menu when clicking on a link
+    navLinks.forEach(link => {
+        link.addEventListener('click', function() {
+            if (window.innerWidth <= 768) {
+                navMenu.classList.remove('active');
+                hamburger.classList.remove('active');
+            }
+        });
+    });
+    
+    // Close mobile menu when resizing to desktop view
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            navMenu.classList.remove('active');
+            hamburger.classList.remove('active');
         }
     });
     

@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Happy Birthday Special</title>
     <link rel="stylesheet" href="styles.css">
-    <!-- Font for beautiful typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Fonts for beautiful typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Floating elements for animation -->
@@ -33,12 +33,19 @@
 
     <!-- Navigation -->
     <nav class="navbar">
-        <ul class="nav-menu">
-            <li><a href="#about">About Us</a></li>
-            <li><a href="#memories">Memories</a></li>
-            <li><a href="#video">Special Video</a></li>
-            <li><a href="#wishes">Wishes</a></li>
-        </ul>
+        <div class="nav-container">
+            <ul class="nav-menu">
+                <li><a href="#about">About Us</a></li>
+                <li><a href="#memories">Memories</a></li>
+                <li><a href="#video">Special Video</a></li>
+                <li><a href="#wishes">Wishes</a></li>
+            </ul>
+            <div class="hamburger" id="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </div>
+        </div>
     </nav>
 
     <!-- About Section -->
@@ -129,22 +136,12 @@
     <!-- Wishes Section -->
     <section id="wishes" class="section wishes-section">
         <div class="container">
-            <h2 class="section-title">Send Your Wishes</h2>
+            <h2 class="section-title">A Special Message</h2>
             <div class="wishes-content">
-                <div class="wishes-form">
-                    <input type="text" id="wish-input" placeholder="Write your birthday wish here...">
-                    <button id="submit-wish">Send Wish</button>
-                </div>
-                <div class="wishes-display">
-                    <!-- Dynamic wishes will appear here -->
-                    <div class="wish-item">
-                        <p>Happy Birthday! Wishing you all the happiness in the world!</p>
-                        <span class="timestamp">Just now</span>
-                    </div>
-                    <div class="wish-item">
-                        <p>May this year bring you joy, success, and countless smile!</p>
-                        <span class="timestamp">2 minutes ago</span>
-                    </div>
+                <div class="personal-message">
+                    <p class="message-text">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+                    </p>
                 </div>
             </div>
         </div>
