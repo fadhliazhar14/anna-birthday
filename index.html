@@ -1,195 +1,432 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday Special</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Fonts for beautiful typography -->
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+    <title>Happy birthday, Ari Anna!</title>
+    
+    <!-- Google Fonts: Great Vibes for headings, Poppins for body text -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS for modern & responsive layout -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fireworks.js for smooth background animation -->
+    <script src="https://cdn.jsdelivr.net/npm/fireworks-js@2.10.7/dist/index.umd.js"></script>
+
+    <style>
+        /* Custom CSS for a more elegant theme, fonts, and smooth animations */
+        :root {
+            --bg-color: #1a1a2e; /* Deep midnight blue */
+            --primary-text: #e0e0e0; /* Soft white */
+            --accent-gold: #f7d794; /* Elegant gold */
+            --accent-rose: #d3a6a1; /* Dusty rose */
+            --card-bg: #2c2c54; /* Darker card background */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--primary-text);
+            font-family: 'Poppins', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Styling for headings with the elegant script font */
+        h1, h2, h3 {
+            font-family: 'Great Vibes', cursive;
+            color: var(--accent-gold);
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .hero h1 {
+            font-size: 5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3.5rem;
+            }
+        }
+
+        /* Container for the fireworks animation */
+        #fireworks-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.6;
+        }
+
+        /* Universal animation for elements fading in on scroll */
+        .fade-in-section {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.645, 0.045, 0.355, 1), transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
+        }
+
+        .fade-in-section.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Card styles for memories and gallery */
+        .custom-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            overflow: hidden;
+        }
+
+        .custom-card:hover {
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
+        }
+        
+        .custom-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            aspect-ratio: 1/1;
+        }
+        
+        /* Modal Styles for opening screen */
+        #opening-modal {
+            background-color: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Parallax Section */
+        .parallax-section {
+            position: relative;
+            background-image: url('assets/img/IMG-20200109-WA0004.jpg');
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+            color: white;
+        }
+
+        .parallax-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.5); /* Dark overlay for text readability */
+            z-index: 0;
+        }
+
+        /* Hero Carousel Styles */
+        .hero {
+            position: relative;
+            overflow: hidden;
+        }
+        .carousel-slide {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            background-size: cover;
+            background-position: center;
+        }
+        .carousel-slide.active {
+            opacity: 1;
+        }
+        
+        /* Custom Video Player Styles */
+        .video-controls input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            background: transparent;
+            cursor: pointer;
+        }
+        .video-controls input[type="range"]::-webkit-slider-runnable-track {
+            background: rgba(255, 255, 255, 0.4);
+            height: 0.25rem;
+            border-radius: 1rem;
+        }
+        .video-controls input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            margin-top: -6px;
+            background-color: var(--accent-gold);
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+        }
+        .video-controls input[type="range"]::-moz-range-track {
+            background: rgba(255, 255, 255, 0.4);
+            height: 0.25rem;
+            border-radius: 1rem;
+        }
+        .video-controls input[type="range"]::-moz-range-thumb {
+            background-color: var(--accent-gold);
+            height: 1rem;
+            width: 1rem;
+            border-radius: 50%;
+            border: none;
+        }
+    </style>
 </head>
-<body>
-    <!-- Hidden Music Player -->
-    <audio id="birthdayMusic" loop preload="auto">
-        <source src="assets/music/Marshmello ft. Bastille - Happier (Official Lyric Video).mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
+<body class="antialiased">
+
+    <!-- The container where the fireworks animation will be rendered -->
+    <div id="fireworks-container"></div>
+    
+    <!-- Opening Modal -->
+    <div id="opening-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 transition-opacity duration-500">
+        <div class="text-center text-white fade-in-section is-visible">
+            <h1 class="text-5xl md:text-7xl mb-4">Hi Dear!</h1>
+            <p class="text-xl md:text-2xl mb-8">There's something special for you...</p>
+            <button id="open-card-btn" class="bg-rose-400 hover:bg-rose-300 text-gray-900 font-bold py-3 px-8 rounded-full transition-transform transform hover:scale-110 duration-300">
+                Let's open it!!
+            </button>
+        </div>
+    </div>
     
     <!-- Mute Button -->
-    <button id="muteBtn" class="mute-btn">
-        <span class="mute-icon">🔊</span>
+    <button id="muteBtn" class="fixed top-4 right-4 z-40 bg-black/30 text-white w-12 h-12 rounded-full flex items-center justify-center backdrop-blur-sm">
+        <span>🔊</span>
     </button>
-    
-    <!-- Opening Overlay -->
-    <div class="opening-overlay" id="openingOverlay">
-        <div class="overlay-content">
-            <h1 class="overlay-title">Special Greeting</h1>
-            <p class="overlay-subtitle">For Ari Anna's Birthday.. 🎈🎉</p>
-            <button class="open-card-btn" id="openCardBtn">Open Greeting Card</button>
-        </div>
-    </div>
-    <!-- Floating elements for animation -->
-    <div class="floating-element element-1"></div>
-    <div class="floating-element element-2"></div>
-    <div class="floating-element element-3"></div>
-    <div class="floating-element element-4"></div>
-    <div class="floating-element element-5"></div>
+    <audio id="birthdayMusic" loop src="assets/music/Marshmello ft. Bastille - Happier (Official Lyric Video).mp3"></audio>
 
-    <!-- Hero Section -->
-    <header class="hero-section">
-        <div class="hero-content">
-            <p class="subtitle">A special celebration for Ari Anna 🥳🥳</p>
-            <div class="balloon-container">
-                <div class="balloon balloon-1 heartbeat">🎈</div>
-                <div class="balloon balloon-2">🎉</div>
-                <div class="balloon balloon-3">💖</div>
-                <div class="balloon balloon-4">🌟</div>
-                <div class="balloon balloon-5">💝</div>
-            </div>
-            <div class="hbd-image-container">
-                <img src="assets/img/HBD-Give.png" alt="Happy Birthday Greeting" class="hbd-image">
-            </div>
-            <div class="txt-glow-div glow">
-                <h1 class="birthday-title rainbow-text" id="title">Happy Birthday, luuv! 💖</h1>
-            </div>
-        </div>
-    </header>
 
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <ul class="nav-menu">
-                <li><a href="#about">About Us</a></li>
-                <li><a href="#memories">Memories</a></li>
-                <li><a href="#video">Special Video</a></li>
-                <li><a href="#wishes">Wishes</a></li>
-            </ul>
-            <div class="hamburger" id="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
+    <main id="main-content" class="relative z-10 opacity-0 transition-opacity duration-1000">
+        <!-- Hero Section -->
+        <section class="hero h-screen flex flex-col items-center justify-center text-center p-4">
+            <!-- Carousel Background -->
+            <div id="hero-carousel" class="absolute inset-0 w-full h-full z-0">
+                <!-- Slides will be dynamically injected by JavaScript -->
             </div>
-        </div>
-    </nav>
+            <!-- Overlay -->
+            <div class="absolute inset-0 w-full h-full bg-black/50 z-10"></div>
+            
+            <!-- Hero Content -->
+            <div class="relative z-20">
+                <h1 class="font-bold mb-2 fade-in-section">Happy Birthdaay!</h1>
+                <p class="text-xl md:text-3xl text-gray-300 fade-in-section" style="transition-delay: 200ms;">My sweetest dear, Ari Anna</p>
+                <img
+                src="assets/img/HBD-Give.png"
+                alt="Ilustrasi Anna"
+                class="w-48 h-48 md:w-64 md:h-64 object-contain my-8 rounded-full shadow-2xl fade-in-section mx-auto"
+                style="transition-delay: 400ms;"
+                />
 
-    <!-- About Section -->
-    <section id="about" class="section about-section">
-        <div class="container">
-            <h2 class="section-title">My Dear..</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Every moment with you has been a treasure. The laughter, the adventures, the quiet moments - all of these have made my life more beautiful.</p>
-                    <p>On your special day, I want you to know how much you mean to me. You bring joy, light, and love into my life every single day.</p>
+                <div class="mt-8 animate-bounce fade-in-section mx-auto w-fit" style="transition-delay: 600ms;">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3" />
+                </svg>
                 </div>
-                <div class="photo-gallery">
-                    <!-- Photo placeholders - Replace with your own images -->
-                    <div class="photo-placeholder">
-                         <img src="assets/img/20191106_184906.jpg" alt="" srcset="">
-                    </div>
-                    <div class="photo-placeholder">
-                        <img src="assets/img/IMG-20220912-WA0001.jpg" alt="" srcset="">
-                    </div>
-                    <div class="photo-placeholder">
-                        <img src="assets/img/IMG-20201028-WA0038.jpg" alt="" srcset="">
-                    </div>
-                    <div class="photo-placeholder">
-                        <img src="assets/img/IMG-20200109-WA0004.jpg" alt="" srcset="">
-                    </div>
-                    <div class="photo-placeholder">
-                        <img src="assets/img/IMG-20191224-WA0007.jpg" alt="" srcset="">
-                    </div>
-                    <div class="photo-placeholder">
-                        <img src="assets/img/20200222_214506.jpg" alt="" srcset="">
-                    </div>
-                    <div class="photo-placeholder">
-                        <img src="assets/img/20200304_203525.jpg" alt="" srcset="">
+            </div>
+        </section>
+
+        <!-- Personal Message Section -->
+        <section class="max-w-4xl mx-auto p-4 py-20 text-center">
+            <h2 class="text-5xl mb-6 fade-in-section">Dear, my luv</h2>
+            <div class="text-lg leading-relaxed max-w-3xl mx-auto fade-in-section" style="transition-delay: 200ms;">
+                <p class="mb-4">
+                    On your special day, I want you to know how much you mean to me. You bring joy, light, and love into my life.
+                </p>
+                <p class="">
+                    Barakallahu fii umrik, sayaaang❤️🤍💚💛 <br>
+                    Sehat dan berkah terus yaa sayang, panjang umur, lancar rezekinya, makin pinter dan rajin ibadahnyaa, Aamiin 🤲..
+                    Selalu jadi kesayangan aku yang gemoy dan humble yaa. Thanks udah nemenin sampe sekarang😘
+                    Maaf kalo belum bisa jadi yang terbaik buat kamu yaa, hehehe. Love youu, mochioo💘. U're SO KIND🤗
+                </p>
+                <blockquote class="italic text-lg text-pink-200 border-l-4 border-pink-400 pl-4 my-6">
+                    “Kamu nggak perlu jadi sempurna, cukup jadi versi terbaik dari dirimu sendiri 💖”
+                </blockquote>
+            </div>
+        </section>
+
+        <!-- Memories Gallery Section -->
+        <section class="max-w-6xl mx-auto p-4 py-20">
+            <h2 class="text-5xl text-center mb-12 fade-in-section">Our Beautiful Memories</h2>
+            <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                 <!-- Menggunakan gambar-gambar dari folder Anda -->
+                <div class="custom-card fade-in-section"><img src="assets/img/IMG-20230205-WA0003.jpg" alt="Kenangan 1"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 100ms;"><img src="assets/img/Untitled.gif" alt="Kenangan 2"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 200ms;"><img src="assets/img/IMG-20201115-WA0000.jpg" alt="Kenangan 3"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 300ms;"><img src="assets/img/IMG-20201115-WA0004.jpg" alt="Kenangan 4"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 400ms;"><img src="assets/img/20191106_184906.jpg" alt="Kenangan 5"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 500ms;"><img src="assets/img/IMG-20220912-WA0001.jpg" alt="Kenangan 6"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 600ms;"><img src="assets/img/IMG-20201028-WA0038.jpg" alt="Kenangan 7"></div>
+                <div class="custom-card fade-in-section" style="transition-delay: 700ms;"><img src="assets/img/IMG-20210723-WA0079.jpg" alt="Kenangan 8"></div>
+            </div>
+        </section>
+        
+        <!-- Video Section -->
+        <section id="video" class="max-w-4xl mx-auto p-4 py-20 text-center">
+            <h2 class="text-5xl mb-12 fade-in-section">Hahahaha..</h2>
+            <div class="video-container relative custom-card fade-in-section p-2">
+                <!-- Pastikan path video ini benar sesuai dengan lokasi file Anda -->
+                <video id="birthday-video" class="rounded-lg w-full" src="assets/vid/VID-20200407-WA0037.mp4"></video>
+                <div class="video-controls absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-4 bg-black/50 p-2 rounded-full backdrop-blur-sm w-11/12 max-w-md">
+                    <button id="play-pause-btn" class="text-white text-2xl">▶️</button>
+                    <input id="seek-bar" type="range" value="0" class="flex-grow">
+                    <div class="flex items-center gap-2">
+                        <button id="video-volume-btn" class="text-white text-2xl">🔊</button>
+                        <input id="volume-bar" type="range" min="0" max="1" step="0.1" value="1" class="w-16 md:w-24">
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Memories Section -->
-    <section id="memories" class="section memories-section">
-        <div class="container">
-            <h2 class="section-title">Our Beautiful Memories</h2>
-            <div class="memories-grid">
-                <div class="memory-card">
-                    <div class="memory-placeholder">
-                        <img src="assets/img/IMG-20230205-WA0003.jpg" alt="" srcset="">
-                    </div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">
-                        <img src="assets/img/Untitled.gif" alt="" srcset="">
-                    </div>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">
-                        <img src="assets/img/IMG-20201115-WA0000.jpg" alt="" srcset="">
-                    </div>
-                    <p>That special trip</p>
-                </div>
-                <div class="memory-card">
-                    <div class="memory-placeholder">
-                        <img src="assets/img/IMG-20201115-WA0004.jpg" alt="" srcset="">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+        <!-- Wish for the Future Section with Parallax Effect -->
+        <section class="parallax-section relative py-32 text-center">
+             <div class="relative z-10 max-w-4xl mx-auto px-4">
+                <h2 class="text-5xl mb-6 fade-in-section">Towards the future</h2>
+                <p class="text-lg max-w-3xl mx-auto fade-in-section" style="transition-delay: 200ms;">
+                    Udah jauh juga ya perjalanan kita, ayang hehehe. <br>
+                    Sekali lagi makasih udah jadi manusia yang baik dan sabar selama nemenin aku sampe hari ini. <br> 
+                    Jangan bosen-bosen sama aku. <br>
+                    Kita jalanin terus sama-sama ya.. <br>
+                    U're my source of happiness🤗
+                </p>
+             </div>
+        </section>
+        
+        <!-- Footer -->
+        <footer class="text-center p-8">
+            <p class="text-m max-w-3xl mx-auto fade-in-section">
+                Made with 💖 by your handsome fans hahaha..
+            </p>
+        </footer>
+    </main>
 
-    <!-- Video Section -->
-    <section id="video" class="section video-section">
-        <div class="container">
-            <h2 class="section-title">A Special Message</h2>
-            <div class="video-container">
-                <video id="birthday-video">
-                    <source src="assets/vid/VID-20200407-WA0037.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video-controls">
-                    <button id="play-pause-btn">▶</button>
-                    <input type="range" id="seek-bar" value="0">
-                    <button id="volume-btn">🔊</button>
-                    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
-                </div>
-                <!-- <p>Watch this special message I've prepared for you!</p> -->
-            </div>
-        </div>
-    </section>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Element References ---
+            const openingModal = document.getElementById('opening-modal');
+            const openCardBtn = document.getElementById('open-card-btn');
+            const mainContent = document.getElementById('main-content');
+            const musicPlayer = document.getElementById('birthdayMusic');
+            const muteBtn = document.getElementById('muteBtn');
+            const muteIcon = muteBtn.querySelector('span');
+            
+            // --- Fireworks Animation ---
+            const container = document.getElementById('fireworks-container');
+            const fireworks = new Fireworks.default(container, {
+                rocketsPoint: { min: 50, max: 50 },
+                hue: { min: 200, max: 220 },
+                delay: { min: 30, max: 60 },
+                brightness: { min: 50, max: 80 },
+                decay: { min: 0.015, max: 0.03 },
+                intensity: 3,
+                friction: 0.97,
+                gravity: 1.5,
+                opacity: 0.5
+            });
+            
+            // --- Opening Modal & Music ---
+            openCardBtn.addEventListener('click', () => {
+                openingModal.classList.add('opacity-0', 'pointer-events-none');
+                mainContent.classList.remove('opacity-0');
+                
+                // Play music on user interaction
+                musicPlayer.play().catch(e => console.error("Autoplay was prevented.", e));
+                fireworks.start();
+                
+                setTimeout(() => openingModal.style.display = 'none', 1000);
+            });
+            
+            // --- Mute Button Logic ---
+            muteBtn.addEventListener('click', () => {
+                musicPlayer.muted = !musicPlayer.muted;
+                muteIcon.textContent = musicPlayer.muted ? '🔇' : '🔊';
+            });
 
-    <!-- Wishes Section -->
-    <section id="wishes" class="section wishes-section">
-        <div class="container">
-            <h2 class="section-title">A Special Message</h2>
-            <div class="wishes-content">
-                <div class="personal-message">
-                    <p class="message-text">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
+            // --- Scroll Animation Logic ---
+            const sections = document.querySelectorAll('.fade-in-section');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-visible');
+                    }
+                });
+            }, { threshold: 0.1 });
 
-    <!-- Footer -->
-    <footer class="footer-section">
-        <div class="container">
-            <p>Made with ❤️ for the most amazing person in my life</p>
-            <p>Happy Birthday! May all your dreams come true.</p>
-        </div>
-    </footer>
+            sections.forEach(section => observer.observe(section));
+            
+            // --- Hero Carousel Logic ---
+            const carouselContainer = document.getElementById('hero-carousel');
+            const carouselImages = [
+                'assets/img/IMG-20230205-WA0003.jpg',
+                'assets/img/IMG-20201115-WA0000.jpg',
+                'assets/img/IMG-20201115-WA0004.jpg',
+                'assets/img/IMG-20201028-WA0038.jpg'
+            ];
+            let currentImageIndex = 0;
 
-    <!-- Particles for animation -->
-    <div class="particles-container">
-        <div class="particle particle-1"></div>
-        <div class="particle particle-2"></div>
-        <div class="particle particle-3"></div>
-        <div class="particle particle-4"></div>
-        <div class="particle particle-5"></div>
-    </div>
+            // Pre-create slide elements
+            carouselImages.forEach((src, index) => {
+                const slide = document.createElement('div');
+                slide.className = 'carousel-slide';
+                slide.style.backgroundImage = `url('${src}')`;
+                if (index === 0) {
+                    slide.classList.add('active');
+                }
+                carouselContainer.appendChild(slide);
+            });
 
-    <script src="script.js"></script>
+            const slides = carouselContainer.querySelectorAll('.carousel-slide');
+            
+            // Note: A 0.5s interval is extremely fast. A 3-second interval provides a smoother experience.
+            setInterval(() => {
+                slides[currentImageIndex].classList.remove('active');
+                currentImageIndex = (currentImageIndex + 1) % slides.length;
+                slides[currentImageIndex].classList.add('active');
+            }, 3000); // Change image every 3 seconds
+
+            // --- Video Player Logic ---
+            const video = document.getElementById('birthday-video');
+            const playPauseBtn = document.getElementById('play-pause-btn');
+            const seekBar = document.getElementById('seek-bar');
+            const volumeBtn = document.getElementById('video-volume-btn');
+            const volumeBar = document.getElementById('volume-bar');
+
+            if (video) {
+                playPauseBtn.addEventListener('click', () => {
+                    if (video.paused || video.ended) {
+                        video.play();
+                    } else {
+                        video.pause();
+                    }
+                });
+
+                video.addEventListener('play', () => { playPauseBtn.textContent = '⏸️'; });
+                video.addEventListener('pause', () => { playPauseBtn.textContent = '▶️'; });
+
+                video.addEventListener('timeupdate', () => {
+                    const progress = (video.currentTime / video.duration) * 100;
+                    seekBar.value = progress;
+                });
+
+                seekBar.addEventListener('input', () => {
+                    video.currentTime = (seekBar.value / 100) * video.duration;
+                });
+
+                volumeBtn.addEventListener('click', () => { video.muted = !video.muted; });
+                
+                video.addEventListener('volumechange', () => {
+                    volumeBar.value = video.muted ? 0 : video.volume;
+                    volumeBtn.textContent = (video.muted || video.volume === 0) ? '🔇' : '🔊';
+                });
+
+                volumeBar.addEventListener('input', (e) => {
+                    video.muted = e.target.value == 0;
+                    video.volume = e.target.value;
+                });
+            }
+        });
+    </script>
+
 </body>
 </html>
